@@ -18,4 +18,4 @@ Thumbs.db
 .vercel
 
 # Zip / archive
-assets/*.zip
+public/assets/*.zip
