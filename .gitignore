@@ -1,0 +1,21 @@
+# Dependencies
+node_modules
+
+# Build output
+dist
+
+# Vite cache
+.vite
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Local env
+*.local
+
+# Vercel
+.vercel
+
+# Zip / archive
+assets/*.zip
