@@ -99,8 +99,8 @@ startBtn.addEventListener('click', async () => {
     introStatus.classList.add('err');
     introStatus.textContent =
       err?.name === 'NotAllowedError'
-        ? 'Camera permission was blocked. Allow it in the address bar, or play with the mouse.'
-        : `Camera unavailable (${err?.message || err}). You can still play with the mouse.`;
+        ? 'Izin kamera ditolak. Izinkan di address bar, atau gunakan mouse.'
+        : `Kamera tidak tersedia (${err?.message || err}). Kamu tetap bisa main dengan mouse.`;
     startBtn.disabled = false;
   }
 });
@@ -155,7 +155,7 @@ const cameraPoppedOut = () => !!cameraWin && !cameraWin.closed;
 function syncPreview() {
   const out = cameraPoppedOut();
   previewBox.hidden = !showPreview || controller.source !== 'camera' || out;
-  popoutBtn.textContent = out ? 'Bring camera back' : 'Open camera in new window';
+  popoutBtn.textContent = out ? 'Kembalikan kamera' : 'Buka kamera di jendela baru';
 }
 
 function toggleCameraWindow() {
@@ -164,7 +164,7 @@ function toggleCameraWindow() {
   } else {
     const w = Math.round(Math.min(960, screen.availWidth * 0.6));
     cameraWin = window.open('camera.html', 'wayang-camera', `popup,width=${w},height=${Math.round(w / tracker.aspect)}`);
-    if (!cameraWin) showToast('Pop-up blocked. Allow pop-ups for this site to open the camera window.');
+    if (!cameraWin) showToast('Pop-up diblokir. Izinkan pop-up untuk situs ini agar jendela kamera bisa dibuka.');
   }
   syncPreview();
 }
@@ -185,7 +185,7 @@ const volumeInput = $('opt-volume');
 volumeInput.value = String(music.volume);
 function syncSoundUi() {
   soundBtn.setAttribute('aria-pressed', String(music.muted));
-  soundBtn.setAttribute('aria-label', music.muted ? 'Unmute music' : 'Mute music');
+  soundBtn.setAttribute('aria-label', music.muted ? 'Nyalakan musik' : 'Bisukan musik');
 }
 syncSoundUi();
 const startMusic = (e) => {
@@ -250,19 +250,19 @@ function updateHud() {
   let text, cls = '';
   if (source === 'camera') {
     if (status.hands === 0) {
-      text = controller.puppetCount === 2 ? 'Camera on · raise both hands' : 'Camera on · show your hand';
-      cls = 'warn';
-    } else {
-      text = {
-        'two puppets': status.hands === 2 ? 'Two puppets · one per hand' : 'Two puppets · 1 hand seen',
-        'two hands': 'One puppet · gapit + tuding',
-        'one hand': 'One puppet · palm + fingers',
-      }[status.mode] ?? status.mode;
-      if (status.calibrating) text += ' · calibrating depth';
+      text = controller.puppetCount === 2 ? 'Kamera aktif · angkat kedua tangan' : 'Kamera aktif · tunjukkan tanganmu';
+        cls = 'warn';
+      } else {
+        text = {
+          'two puppets': status.hands === 2 ? 'Dua wayang · satu per tangan' : 'Dua wayang · 1 tangan terdeteksi',
+          'two hands': 'Satu wayang · gapit + tuding',
+          'one hand': 'Satu wayang · telapak + jari',
+        }[status.mode] ?? status.mode;
+        if (status.calibrating) text += ' · mengkalibrasi kedalaman';
       cls = 'live';
     }
   } else if (source === 'mouse') {
-    text = 'Mouse · scroll for depth';
+    text = 'Mouse · scroll untuk kedalaman';
   } else {
     text = 'Demo';
   }
@@ -362,7 +362,7 @@ function tick(nowMs) {
   active.forEach((p, j) => {
     if (p.danceStarted) {
       p.danceStarted = false;
-      showToast(active.length === 2 ? `${j === 0 ? 'Left' : 'Right'} puppet · Kiprahan` : 'Kiprahan');
+      showToast(active.length === 2 ? `${j === 0 ? 'Wayang kiri' : 'Wayang kanan'} · Kiprahan` : 'Kiprahan');
     }
   });
 

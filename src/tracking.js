@@ -13,7 +13,7 @@ export class HandTracker {
   }
 
   async start(onStatus = () => {}) {
-    onStatus('Requesting camera…');
+    onStatus('Meminta akses kamera…');
     const stream = await navigator.mediaDevices.getUserMedia({
       video: { facingMode: 'user', width: { ideal: 1280 }, height: { ideal: 720 }, frameRate: { ideal: 60 } },
       audio: false,
@@ -21,7 +21,7 @@ export class HandTracker {
     this.video.srcObject = stream;
     await this.video.play();
 
-    onStatus('Loading hand-tracking model…');
+    onStatus('Memuat model pelacak tangan…');
     const { FilesetResolver, HandLandmarker } = await import(/* @vite-ignore */ `${MP_BASE}/vision_bundle.mjs`);
     const fileset = await FilesetResolver.forVisionTasks(`${MP_BASE}/wasm`);
     const options = (delegate) => ({
